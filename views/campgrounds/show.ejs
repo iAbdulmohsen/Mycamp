@@ -1,0 +1,118 @@
+<%- include("../partials/header") %>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-3">
+      <p class="lead ttt">معلومات التواصل</p>
+
+
+
+      <div class="list-group ttt ">
+        <li class="list-group-item it-info">
+        <%= campgrounds.phone%> <strong>:جوال التواصل</strong>
+
+        </li>
+
+        <li class="list-group-item it-info li-2 lc"> <strong class="text-li2">فيديو للمخيم</strong> 
+
+          
+          <iframe width="240" height="150" src="<%= campgrounds.vid.replace('watch?v=','embed/')%>" frameborder="0"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+            
+        </li>
+
+        <li class="list-group-item lc "><strong>الموقع</strong> </li>
+        <p>
+          
+        </p>
+        <iframe width="263" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBmp2TB0WUfAJ99_KWw4yphWRxqv3iTelw
+           					 &q=<%= campgrounds.loc%>" allowfullscreen>
+        </iframe>
+      </div>
+
+
+
+    </div>
+    <div class="col-md-9">
+      <div class="thumbnail show">
+        <img class="img-responsive" src="<%= campgrounds.image%>" alt="" />
+        <div class="caption-full">
+          <h4 class="pull-left tt">ريال    <%=campgrounds.price%> / لليله الواحده</h4>
+          <div class="fontar">
+          <h4 ><a href=""><%= campgrounds.name%></a></h4>
+          <a href=""></a>
+          <p><%= campgrounds.desc%></p>
+          <p>
+            <em> Sumbitted By : </em
+            ><strong><%= campgrounds.author.username%></strong>
+          </p>
+          <p><strong>Created  : </strong><%= moment(campgrounds.createdAt).fromNow() %></p>
+          
+          <%if(therUser && campgrounds.author.id.equals(therUser._id)){%>
+          
+          
+        
+
+        <form
+          class="delete-form"
+          action="/campgrounds/<%=campgrounds._id%>?_method=DELETE"
+          method="POST"
+        >
+          <button class="btn btn-danger pull-right" style="margin-left: 10px; display: inline">
+            حذف المخيم
+          </button>
+        </form>
+<a class="btn btn-warning" href="/campgrounds/<%= campgrounds._id%>/edit">نعديل المخيم</a>
+        
+        <%}%>
+
+        </div>
+        </div>
+      </div>
+      
+      <div class="well">
+        <div class="text-right">
+          <a
+            class="btn btn-success ttt"
+            href="/campgrounds/<%= campgrounds._id%>/comments/new"
+            >اضافة تعليق</a
+          >
+        </div>
+        <hr />
+
+        <% campgrounds.comments.forEach(function(comment){ %>
+        <div class="row">
+          <div class="col-md-12 ttt">
+            <strong><%= comment.author.username%></strong>
+            <span class="pull-right"><%= moment(comment.createdAt).fromNow() %></span>
+            <p><%= comment.text %></p>
+
+            <%if(therUser && comment.author.id.equals(therUser._id)){%>
+            <a
+              href="/campgrounds/<%= campgrounds._id%>/comments/<%=comment._id%>/edit"
+              class="btn btn-xs btn-warning ttt"
+              >تعديل التعليق</a
+            >
+            <form
+              class="delete-form"
+              action="/campgrounds/<%= campgrounds._id%>/comments/<%=comment._id%>?_method=DELETE"
+              method="POST"
+            >
+              <input
+                type="submit"
+                class="btn btn-xs btn-danger ttt"
+                value="حذف التعليق"
+              />
+            </form>
+            <%}%>
+
+            <hr />
+          </div>
+        </div>
+        <% }) %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include("../partials/footer") %>

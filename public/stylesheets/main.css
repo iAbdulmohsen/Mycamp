@@ -1,0 +1,42 @@
+.thumbnail img {
+width: 100%;
+}
+.show{
+    padding: 0;
+
+}
+.thumbnail .caption-full {
+    padding: 9px ;
+}
+
+.delete-form{
+    display:inline;
+}
+
+.fontar{
+    font-family: 'Tajawal', sans-serif;
+    text-align: right;
+}
+.tt{
+    margin-bottom: 25px;
+    font-family: 'Tajawal', sans-serif;
+
+}
+.ttt{
+        font-family: 'Tajawal', sans-serif;
+
+}
+.lead{
+    text-align: right;
+}
+
+.it-info{
+    text-align: right;
+}
+.li-2{
+    padding-bottom: 10px;
+}
+
+.lc{
+    text-align: center;
+}
